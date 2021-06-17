@@ -1,0 +1,88 @@
+<div class="container">
+
+  <h1>Araç Takip</h1>
+
+  <mat-form-field appearance="outline">
+    <input matInput placeholder="Aranacak Değer Giriniz" (keyup)="Filtrele($event)">
+  </mat-form-field>
+
+  <button mat-fab color="warn" matTooltip="Araç Ekle" *ngIf="apiServis.yetkiKontrol(['Uye','Admin'])"
+    (click)="AracEkle()">
+    <mat-icon aria-label="label">add</mat-icon>
+  </button>
+
+  <p>&nbsp;</p>
+
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z10" matSort>
+
+    <ng-container matColumnDef="aracPlaka">
+
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Araç Plaka
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.aracPlaka}} </mat-cell>
+
+    </ng-container>
+
+    <ng-container matColumnDef="aracIsim">
+
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Araç İsmi
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.aracIsim}} </mat-cell>
+
+    </ng-container>
+
+    <ng-container matColumnDef="aracMarka">
+
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Araç Marka
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.aracMarka}} </mat-cell>
+
+    </ng-container>
+
+    <ng-container matColumnDef="aracFiyatSaat">
+
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Araç Fiyat (Saatlik)
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.aracFiyatSaat}} </mat-cell>
+
+    </ng-container>
+
+
+    <ng-container matColumnDef="islemler">
+
+      <mat-header-cell *matHeaderCellDef> İşlemler</mat-header-cell>
+
+      <mat-cell *matCellDef="let kayit">
+
+        <button mat-icon-button matTooltip="Üyeleri Görüntüle" *ngIf="apiServis.yetkiKontrol(['Admin'])"
+          [routerLink]="['/uyeliste',kayit.aracId ]">
+
+          <mat-icon aria-label="label" color="primary">article</mat-icon>
+
+        </button>
+
+        <button mat-icon-button matTooltip="Araç Düzenle" *ngIf="apiServis.yetkiKontrol(['Admin'])"
+          (click)="Duzenle(kayit)">
+
+          <mat-icon aria-label="label" color="accent">edit</mat-icon>
+
+        </button>
+
+        <button mat-icon-button matTooltip="Araç Sil">
+
+          <mat-icon aria-label="label" color="warn" (click)="Sil(kayit)" *ngIf="apiServis.yetkiKontrol(['Admin'])">
+            delete</mat-icon>
+
+        </button>
+
+      </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+  </mat-paginator>
+</div>

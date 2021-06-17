@@ -1,0 +1,83 @@
+<div class="container">
+
+  <h1>Üye Takip</h1>
+
+  <mat-form-field appearance="outline">
+    <input matInput placeholder="Aranacak Değer Giriniz" (keyup)="Filtrele($event)">
+  </mat-form-field>
+
+  <button mat-fab color="warn" matTooltip="Üye Ekle" (click)="UyeEkle()">
+    <mat-icon aria-label="label">add</mat-icon>
+  </button>
+
+  <p>&nbsp;</p>
+
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z10" matSort>
+
+    <ng-container matColumnDef="uyeAdSoyad">
+
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Üye Ad Soyad
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.uyeAdSoyad}} </mat-cell>
+
+    </ng-container>
+
+    <ng-container matColumnDef="uyeMail">
+
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Üye Mail
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.uyeMail}} </mat-cell>
+
+    </ng-container>
+
+    <ng-container matColumnDef="uyeTel">
+
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Üye Tel Numarası </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.uyeTel}} </mat-cell>
+
+    </ng-container>
+
+    <ng-container matColumnDef="uyeSifre">
+
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Üye Şifre
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.uyeSifre}} </mat-cell>
+
+    </ng-container>
+
+
+    <ng-container matColumnDef="islemler">
+
+      <mat-header-cell *matHeaderCellDef> İşlemler</mat-header-cell>
+
+      <mat-cell *matCellDef="let kayit">
+
+        <button mat-icon-button matTooltip="Araçları Görüntüle" [routerLink]="['/aracliste',kayit.uyeId ]">
+
+          <mat-icon aria-label="label" color="primary">article</mat-icon>
+
+        </button>
+
+        <button mat-icon-button matTooltip="Üye Düzenle" (click)="Duzenle(kayit)">
+
+          <mat-icon aria-label="label" color="accent">edit</mat-icon>
+
+        </button>
+
+        <button mat-icon-button matTooltip="Üye Sil">
+
+          <mat-icon aria-label="label" color="warn" (click)="Sil(kayit)">delete</mat-icon>
+
+        </button>
+
+      </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+  </mat-paginator>
+</div>

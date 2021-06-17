@@ -1,0 +1,52 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <span>{{dialogBaslik}}</span>
+</mat-toolbar>
+
+<div class="container">
+
+  <form [formGroup]="frm">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Araç Plaka</mat-label>
+      <input matInput placeholder="Arac Plaka" formControlName="aracPlaka" name="aracPlaka" required type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Araç İsim</mat-label>
+      <input matInput placeholder="Araç İsim" formControlName="aracIsim" name="aracIsim" required type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Araç Marka</mat-label>
+      <input matInput placeholder="Araç Marka" formControlName="aracMarka" name="aracMarka" required type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Araç Detay</mat-label>
+      <input matInput placeholder="Araç Detay" formControlName="aracDetay" name="aracDetay" required type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Araç Fiyat (Saat)</mat-label>
+      <input matInput placeholder="Araç Fiyat (Saat)" formControlName="aracFiyatSaat" name="aracFiyatSaat" required
+        type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Araç Fiyat (Gün)</mat-label>
+      <input matInput placeholder="Araç Fiyat (Gün)" formControlName="aracFiyatGün" name="aracFiyataracFiyatGünSaat"
+        required type="text">
+    </mat-form-field>
+
+
+
+  </form>
+
+  <button mat-raised-button color="primary" [disabled]="frm.invalid" (click)="dialog.close(frm.value)">Kaydet</button>
+
+  &nbsp;
+
+  <button mat-raised-button color="warn" (click)="dialog.close()"> İptal </button>
+
+
+</div>
